@@ -6,7 +6,6 @@ module Api::V1
   # GET /users
   def index
     @users = User.all
-
     render json: @users
   end
 
