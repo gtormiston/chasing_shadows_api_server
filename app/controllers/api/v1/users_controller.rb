@@ -19,6 +19,7 @@ module Api::V1
     @user = User.new(user_params)
 
     if @user.save
+      # send api key back to user (WIP)
       render json: @user, status: :created
     else
       render json: @user.errors, status: :unprocessable_entity
@@ -47,7 +48,7 @@ module Api::V1
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:name, :email)
+      params.require(:user).permit(:name, :email, :password)
     end
   end
 end
