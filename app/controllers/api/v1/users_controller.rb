@@ -19,8 +19,7 @@ module Api::V1
     @user = User.new(user_params)
 
     if @user.save
-      # send api key back to user (WIP)
-      render json: @user, status: :created
+      render json: [@user.name, @user.email, @user.api_key], status: :created
     else
       render json: @user.errors, status: :unprocessable_entity
     end
