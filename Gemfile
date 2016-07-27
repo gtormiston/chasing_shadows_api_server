@@ -7,6 +7,7 @@ gem 'active_model_serializers'
 gem 'rack-cors'
 gem 'rack-attack'
 gem 'bcrypt'
+gem 'geokit-rails'
 
 group :development, :test do
   gem 'byebug', platform: :mri
