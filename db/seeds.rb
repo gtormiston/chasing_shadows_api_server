@@ -16,3 +16,17 @@
 ].each do |user_attributes|
   User.create(user_attributes)
 end
+
+[
+  { name: "MONSTERONE",   active: true},
+  { name: "MONSTERTWO",   active: true}
+].each do |enemy_attributes|
+  Enemy.create(enemy_attributes)
+end
+
+[
+  { lat: "51.519736", lng: "-0.076467", enemy_id: 1},
+  { lat: "51.519750", lng: "-0.074708", enemy_id: 2}
+].each do |enemyloc_attributes|
+  EnemyLocation.create(enemyloc_attributes)
+end

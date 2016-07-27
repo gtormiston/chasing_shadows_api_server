@@ -18,10 +18,8 @@ ActiveRecord::Schema.define(version: 20160727175523) do
   create_table "enemies", force: :cascade do |t|
     t.string   "name"
     t.boolean  "active"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.integer  "enemy_location_id"
-    t.index ["enemy_location_id"], name: "index_enemies_on_enemy_location_id", using: :btree
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "enemy_locations", force: :cascade do |t|
@@ -42,6 +40,5 @@ ActiveRecord::Schema.define(version: 20160727175523) do
     t.string   "password_digest"
   end
 
-  add_foreign_key "enemies", "enemy_locations"
   add_foreign_key "enemy_locations", "enemies"
 end
