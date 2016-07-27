@@ -6,7 +6,7 @@ gem 'puma', '~> 3.0'
 gem 'active_model_serializers'
 gem 'rack-cors'
 gem 'rack-attack'
-
+gem 'bcrypt'
 
 group :development, :test do
   gem 'byebug', platform: :mri
