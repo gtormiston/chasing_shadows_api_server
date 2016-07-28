@@ -14,8 +14,8 @@
 end
 
 [
-  { lat: "51.518971", lng: "-0.074418", user_id: 1},
-  { lat: "49.054587", lng: "-122.328026", user_id: 2}
+  { lat: 51.518971, lng: -0.074418, user_id: 1},
+  { lat: 49.054587, lng: -122.328026, user_id: 2}
 ].each do |userloc_attributes|
   UserLocation.create(userloc_attributes)
 end
@@ -29,9 +29,8 @@ end
 end
 
 [
-  { lat: "51.519736", lng: "-0.076467", enemy_id: 1},
-  { lat: "51.519750", lng: "-0.074708", enemy_id: 2}
+  { lat: 51.519736, lng: -0.076467, enemy_id: 1},
+  { lat: 51.519750, lng: -0.074708, enemy_id: 2}
 ].each do |enemyloc_attributes|
   EnemyLocation.create(enemyloc_attributes)
 end
-

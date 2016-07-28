@@ -1,4 +1,4 @@
 class EnemyLocation < ApplicationRecord
-  acts_as_mappable :default_units => :kms
+  acts_as_mappable 
   belongs_to :enemy
 end

@@ -1,8 +1,8 @@
 class CreateUserLocations < ActiveRecord::Migration[5.0]
   def change
     create_table :user_locations do |t|
-      t.string :lat
-      t.string :lng
+      t.float :lat
+      t.float :lng
 
       t.timestamps
     end
