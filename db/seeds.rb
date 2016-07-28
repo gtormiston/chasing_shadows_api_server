@@ -22,15 +22,15 @@ end
 
 
 [
-  { name: "MONSTERONE",   active: true},
-  { name: "MONSTERTWO",   active: true}
+  { name: "MAKERSMONSTER",   active: true},
+  { name: "STATIONMONSTER",   active: true}
 ].each do |enemy_attributes|
   Enemy.create(enemy_attributes)
 end
 
 [
-  { lat: 51.519736, lng: -0.076467, enemy_id: 1},
-  { lat: 51.519750, lng: -0.074708, enemy_id: 2}
+  { lat: 51.51734, lng: -0.0732808, enemy_id: 1},
+  { lat: 51.515486, lng: -0.0726127, enemy_id: 2}
 ].each do |enemyloc_attributes|
   EnemyLocation.create(enemyloc_attributes)
 end
