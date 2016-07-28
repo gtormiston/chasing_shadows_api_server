@@ -22,15 +22,21 @@ end
 
 
 [
-  { name: "MAKERSMONSTER",   active: true},
-  { name: "STATIONMONSTER",   active: true}
-].each do |enemy_attributes|
+  { name: "Makers Monster",            active: true, size: 50},
+  { name: "Aldgate East Tube Monster", active: true, size: 10},
+  { name: "Aldgate Tower Monster",   active: true, size: 5},
+  { name: "Spitalfields Monster",   active: true, size: 1},
+  { name: "Chicken Katsu Wrap Monster", active: true, size: 11}
+  ].each do |enemy_attributes|
   Enemy.create(enemy_attributes)
 end
 
 [
   { lat: 51.51734, lng: -0.0732808, enemy_id: 1},
-  { lat: 51.515486, lng: -0.0726127, enemy_id: 2}
+  { lat: 51.515486, lng: -0.0726127, enemy_id: 2},
+  { lat: 51.5148623, lng: -0.07222109, enemy_id: 3},
+  { lat: 51.5193838, lng: -0.0757565, enemy_id: 4},
+  { lat: 51.5156715, lng: -0.07458440, enemy_id: 5},
 ].each do |enemyloc_attributes|
   EnemyLocation.create(enemyloc_attributes)
 end
