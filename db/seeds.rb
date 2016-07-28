@@ -7,15 +7,19 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 [
-  { name: "Anna",   email: "anna@example.com"},
-  { name: "Tim", email: "tim@example.com"},
-  { name: "Alistair",  email: "alistair@example.com"},
-  { name: "Enzo", email: "enzo@example.com"},
-  { name: "Graham", email: "graham@example.com"},
-  { name: "Lukasz",   email: "lukasz@example.com"}
+  { name: "Anna",   email: "anna@example.com", password: "password"},
+  { name: "Tim", email: "tim@example.com", password: "password"}
 ].each do |user_attributes|
   User.create(user_attributes)
 end
+
+[
+  { lat: "51.518971", lng: "-0.074418", user_id: 1},
+  { lat: "49.054587", lng: "-122.328026", user_id: 2}
+].each do |userloc_attributes|
+  UserLocation.create(userloc_attributes)
+end
+
 
 [
   { name: "MONSTERONE",   active: true},
@@ -30,3 +34,4 @@ end
 ].each do |enemyloc_attributes|
   EnemyLocation.create(enemyloc_attributes)
 end
+

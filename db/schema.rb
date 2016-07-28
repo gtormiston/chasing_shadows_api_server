@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160727175523) do
+ActiveRecord::Schema.define(version: 20160727183612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,15 @@ ActiveRecord::Schema.define(version: 20160727175523) do
     t.index ["enemy_id"], name: "index_enemy_locations_on_enemy_id", using: :btree
   end
 
+  create_table "user_locations", force: :cascade do |t|
+    t.string   "lat"
+    t.string   "lng"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_user_locations_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
@@ -41,4 +50,5 @@ ActiveRecord::Schema.define(version: 20160727175523) do
   end
 
   add_foreign_key "enemy_locations", "enemies"
+  add_foreign_key "user_locations", "users"
 end

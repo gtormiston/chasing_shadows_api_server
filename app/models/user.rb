@@ -1,7 +1,9 @@
 class User < ApplicationRecord
 
+  has_one :user_location
   has_secure_password
   validates_presence_of :name, :email
+
 
   before_create do |user|
     user.api_key = user.generate_api_key
