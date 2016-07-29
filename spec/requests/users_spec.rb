@@ -11,12 +11,17 @@ RSpec.describe "Users", type: :request do
 
 
   describe "GET /api/v1/users" do
-    it "User path runs" do
+    it "Will authenticate user with token" do
 
       get "/api/v1/users", headers:{ "HTTP_AUTHORIZATION" => "Token token=\"#{user.api_key}\""}
-      # ,{ 'HTTP_AUTHORIZATION'=>"Token token=\"#{user.api_key}\""}
-      # p request
+
       expect(response).to have_http_status(200)
+    end
+
+    it "Will not authenticate a user without a token" do
+      get "/api/v1/users"
+      expect(response).to have_http_status(401)
+
     end
   end
 end
