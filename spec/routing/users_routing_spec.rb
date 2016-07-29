@@ -7,16 +7,12 @@ RSpec.describe UsersController, type: :routing do
       expect(:get => "/api/v1/users").to route_to("api/v1/users#index")
     end
 
-    it "routes to #new" do
-      expect(:get => "/api/v1/users/new").to route_to("api/v1/users#new")
+    it "routes to #create" do
+      expect(:post => "/api/v1/users").to route_to("api/v1/users#create")
     end
 
     it "routes to #show" do
       expect(:get => "/api/v1/users/1").to route_to("api/v1/users#show", :id => "1")
-    end
-
-    it "routes to #edit" do
-      expect(:get => "/api/v1/users/1/edit").to route_to("api/v1/users#edit", :id => "1")
     end
 
     it "routes to #create" do

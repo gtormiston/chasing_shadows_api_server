@@ -5,8 +5,7 @@ module Api::V1
 
   # GET /users
   def index
-    @users = User.all
-    render json: @users
+    render json: @current_user
   end
 
   # GET /users/1

@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 20160728133350) do
   end
 
   create_table "enemy_locations", force: :cascade do |t|
-    t.float    "lat"
-    t.float    "lng"
+    t.string   "lat"
+    t.string   "lng"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "enemy_id"
