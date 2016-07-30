@@ -3,55 +3,34 @@ module Api::V1
 
     before_action :set_enemy, only: [:show, :update, :destroy]
 
-  # GET /users
-  def index
-    @current_location =  UserLocation.where(user_id: @current_user.id)[0]
-    # p @current_location.lat
-    @enemy_locations = EnemyLocation.within(5, origin: [@current_location.lat, @current_location.lng])
-    # p @user_location
-    # EnemyLocation.within(5, :origin => [])
-    render json: @enemies
-  end
+    DEFAULT_RANGE = 5
 
-  # GET /users/1
-  def show
-    render json: @enemies
-  end
+    def index
+      @active_enemies = enemies_within_range.select { |enemy| enemy.active }
+      render json: @active_enemies
+    end
 
-  # POST /users
-  # def create
-  #   @user = User.new(user_params)
-  #
-  #   if @user.save
-  #     render json: [@user.name, @user.email, @user.api_key], status: :created
-  #   else
-  #     render json: @user.errors, status: :unprocessable_entity
-  #   end
-  # end
-  #
-  # # PATCH/PUT /users/1
-  # def update
-  #   if @user.update(user_params)
-  #     render json: @user
-  #   else
-  #     render json: @user.errors, status: :unprocessable_entity
-  #   end
-  # end
-  #
-  # # DELETE /users/1
-  # def destroy
-  #   @user.destroy
-  # end
+    def show
+      render json: @enemies
+    end
+
+
+    def update
+      @enemy.size -= 1 if enemies_within_range.include? @enemy
+      @enemy.save
+    end
+
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_enemy
       @enemy = Enemy.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
-    # def user_params
-    #   params.require(:user).permit(:name, :email, :password)
-    # end
+    def enemies_within_range
+      @current_location =  UserLocation.where(user_id: @current_user.id)[0]
+      @enemies = Enemy.within(5, origin: [@current_location.lat, @current_location.lng])
+
+    end
   end
 end

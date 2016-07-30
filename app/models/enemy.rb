@@ -1,4 +1,3 @@
 class Enemy < ApplicationRecord
-  has_one :enemy_location
-  
+    acts_as_mappable
 end
