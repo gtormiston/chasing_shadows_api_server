@@ -48,6 +48,15 @@ describe "Enemies", type: :request do
         end.to change{Enemy.find(mon_id).size}.from(1).to(0)
       end
 
+      it "will set an enemy as inactive if size less or equal than 0" do
+        mon_id = @spitafileds_monster.id
+        expect(@spitafileds_monster.size).to eq(1)
+        expect do
+          attack_enemy(mon_id)
+        end.to change{Enemy.find(mon_id).active}.from(true).to(false)
+        expect(Enemy.find(mon_id).size).to eq(0)
+      end
+
     end
 
 

@@ -17,6 +17,7 @@ module Api::V1
 
     def update
       @enemy.size -= 1 if enemies_within_range.include? @enemy
+      @enemy.active = false if @enemy.size <= 0
       @enemy.save
     end
 
