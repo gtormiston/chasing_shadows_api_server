@@ -5,9 +5,11 @@ module Api::V1
 
   # GET /users
   def index
-    p'================'
-    @enemies = Enemy.all
-    p @enemies
+    @current_location =  UserLocation.where(user_id: @current_user.id)[0]
+    # p @current_location.lat
+    @enemy_locations = EnemyLocation.within(5, origin: [@current_location.lat, @current_location.lng])
+    # p @user_location
+    # EnemyLocation.within(5, :origin => [])
     render json: @enemies
   end
 

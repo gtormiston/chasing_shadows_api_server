@@ -33,7 +33,6 @@ RSpec.describe "Users", type: :request do
 
   describe "GET /api/v1/users" do
     it "Will authenticate user with token" do
-
       get "/api/v1/users", headers:{ "HTTP_AUTHORIZATION" => "Token token=\"#{user.api_key}\""}
       expect(response).to have_http_status(200)
     end

@@ -7,8 +7,10 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'shoulda/matchers'
 require 'simplecov'
-SimpleCov.start
 require 'test_helper'
+require 'database_cleaner'
+SimpleCov.start
+
 
 
 # Add additional requires below this line. Rails is not loaded until this point!
@@ -43,11 +45,27 @@ RSpec.configure do |config|
     end
   end
 
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
+
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
 
 
   config.infer_spec_type_from_file_location!
