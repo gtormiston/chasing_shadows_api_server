@@ -18,7 +18,7 @@ module Api::V1
     @user = User.new(user_params)
 
     if @user.save
-      render json: @user, status: :created
+      render json: {name: @user.name,email: @user.email,api_key: @user.api_key}, status: :created
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ module Api::V1
 
     @current_user.lat = request.headers["USER_LOCATION"]["lat"]
     @current_user.lng = request.headers["USER_LOCATION"]["lng"]
-    @current_user.save
+    @current_user/
 
     # if @user.update(user_params)
     #   render json: @user
