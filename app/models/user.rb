@@ -1,5 +1,6 @@
 class User < ApplicationRecord
 
+  acts_as_mappable
   has_one :user_location
   has_secure_password
   validates_presence_of :name, :email

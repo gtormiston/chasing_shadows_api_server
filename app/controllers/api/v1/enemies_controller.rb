@@ -3,7 +3,6 @@ module Api::V1
 
     before_action :set_enemy, only: [:show, :update, :destroy]
 
-    DEFAULT_RANGE = 5
 
     def index
       @active_enemies = enemies_within_range.select { |enemy| enemy.active }
@@ -11,7 +10,7 @@ module Api::V1
     end
 
     def show
-      render json: @enemies
+      render json: @enemy
     end
 
 
@@ -29,8 +28,7 @@ module Api::V1
     end
 
     def enemies_within_range
-      @current_location =  UserLocation.where(user_id: @current_user.id)[0]
-      @enemies = Enemy.within(5, origin: [@current_location.lat, @current_location.lng])
+      @enemies = Enemy.within(5, origin: [@current_user.lat, @current_user.lng])
 
     end
   end
