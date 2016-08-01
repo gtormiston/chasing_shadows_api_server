@@ -17,6 +17,7 @@ module Api::V1
     end
 
     def update
+      p request.headers
       if @current_user.update(lat: request.headers["USER_LOCATION"]["lat"],
                               lng: request.headers["USER_LOCATION"]["lng"]  )
       else
