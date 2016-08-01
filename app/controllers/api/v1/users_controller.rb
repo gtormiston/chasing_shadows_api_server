@@ -9,9 +9,9 @@ module Api::V1
   end
 
   # GET /users/1
-  def show
-    render json: @user
-  end
+  # def show
+  #   render json: @user
+  # end
 
   # POST /users
   def create
@@ -25,13 +25,19 @@ module Api::V1
   end
 
   # PATCH/PUT /users/1
-  # def update
-  #   if @user.update(user_params)
-  #     render json: @user
-  #   else
-  #     render json: @user.errors, status: :unprocessable_entity
-  #   end
-  # end
+  def update
+
+    @current_user.lat = request.headers["USER_LOCATION"]["lat"]
+    @current_user.lng = request.headers["USER_LOCATION"]["lng"]
+    @current_user.save
+
+    # if @user.update(user_params)
+    #   render json: @user
+    # else
+    #   render json: @user.errors, status: :unprocessable_entity
+    # end
+
+  end
 
   # DELETE /users/1
   # def destroy
@@ -46,7 +52,7 @@ module Api::V1
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:name, :email, :password)
+      params.require(:user).permit(:name, :email, :password, :lat, :lng)
     end
   end
 end
