@@ -20,7 +20,7 @@ module Api::V1
     def update
       p "IN UPDATE ROUTE-"
       p "LAT:"
-      p request.headers["HTTP_USER_LOCATION"].lat
+      p request.headers
       p "JSON?!?!?"
       p JSON.parse(request.headers["HTTP_USER_LOCATION"])
       if @current_user.update(lat: request.headers["HTTP_USER_LOCATION"]["lat"],
