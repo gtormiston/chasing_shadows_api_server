@@ -17,6 +17,7 @@ module Api::V1
     end
 
     def update
+      p "IN UPDATE ROUTE-"
       p request.headers["HTTP_USER_LOCATION"]
       if @current_user.update(lat: request.headers["HTTP_USER_LOCATION"]["lat"],
                               lng: request.headers["HTTP_USER_LOCATION"]["lng"]  )
