@@ -48,7 +48,7 @@ RSpec.describe "Users", type: :request do
       expect do
         update_location(user.id, {"lat" => 51.454513, "lng" => -0.0732808 })
       end.to (change{ User.find(user.id).lng }.from(nil).to(-0.0732808) &&
-        change{ User.find(user.id).lat }.from(nil).to(51.454513))
+              change{ User.find(user.id).lat }.from(nil).to(51.454513))
 
     end
 
