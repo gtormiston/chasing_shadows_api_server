@@ -176,12 +176,10 @@
         null,
         1,
         1,
-        null,
         1,
         1,
         0,
-        2,
-        null,
+        1,
         null,
         null,
         null,
@@ -330,6 +328,8 @@
       ],
       "/Users/alterenzo/Desktop/chasing_shadows_api_server/app/controllers/api/v1/users_controller.rb": [
         1,
+        null,
+        1,
         1,
         1,
         null,
@@ -349,9 +349,12 @@
         null,
         1,
         1,
+        1,
+        1,
+        0,
+        0,
+        0,
         null,
-        1,
-        1,
         null,
         0,
         null,
@@ -379,6 +382,6 @@
         null
       ]
     },
-    "timestamp": 1470067934
+    "timestamp": 1470069238
   }
 }

@@ -1,4 +1,3 @@
-require 'json'
 
 module Api::V1
   class UsersController < ApiController
