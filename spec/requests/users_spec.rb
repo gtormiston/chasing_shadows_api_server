@@ -4,7 +4,7 @@ RSpec.describe "Users", type: :request do
 
 
   let!(:user) do
-    User.create(email: "email@test.com", name: "test", password: "password")
+    User.create(email: "email@test.com", name: "test", password: "password", password_confirmation: "password")
   end
 
   describe "POST /api/v1/users" do

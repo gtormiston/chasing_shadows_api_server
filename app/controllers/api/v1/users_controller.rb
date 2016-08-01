@@ -1,58 +1,41 @@
 module Api::V1
   class UsersController < ApiController
+    before_action :set_user, only: [:show, :destroy]
 
-    before_action :set_user, only: [:show, :update, :destroy]
-
-  # GET /users
-  def index
-    render json: @current_user
-  end
-
-  # GET /users/1
-  # def show
-  #   render json: @user
-  # end
-
-  # POST /users
-  def create
-    @user = User.new(user_params)
-
-    if @user.save
-      render json: {name: @user.name, email: @user.email, api_key: @user.api_key, id: @user.id}, status: :created
-    else
-      render json: @user.errors, status: :unprocessable_entity
+    def index
+      render json: @current_user
     end
-  end
 
-  # PATCH/PUT /users/1
-  def update
+    def create
+      @user = User.new(user_params)
 
-    @current_user.lat = request.headers["USER_LOCATION"]["lat"]
-    @current_user.lng = request.headers["USER_LOCATION"]["lng"]
-    @current_user.save
+      if @user.save
+        render json: sanitized_user, status: :created
+      else
+        render json: @user.errors, status: :unprocessable_entity
+      end
+    end
 
-    # if @user.update(user_params)
-    #   render json: @user
-    # else
-    #   render json: @user.errors, status: :unprocessable_entity
-    # end
+    def update
+      if @current_user.update(lat: request.headers["USER_LOCATION"]["lat"],
+                              lng: request.headers["USER_LOCATION"]["lng"]  )
+      else
+        p "FAIL"
+      end
+    end
 
-  end
+    private
 
-  # DELETE /users/1
-  # def destroy
-  #   @user.destroy
-  # end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:name, :email, :password, :lat, :lng)
+      params.require(:user).permit(:name, :email, :password, :lat, :lng, :password_confirmation)
+    end
+
+    def sanitized_user
+      {id: @user.id, name: @user.name, api_key: @user.api_key, email: @user.email}
     end
   end
 end
