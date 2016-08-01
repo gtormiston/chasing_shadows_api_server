@@ -1,3 +1,5 @@
+require 'json'
+
 module Api::V1
   class UsersController < ApiController
     before_action :set_user, only: [:show, :destroy]
@@ -18,7 +20,10 @@ module Api::V1
 
     def update
       p "IN UPDATE ROUTE-"
-      p request.headers["HTTP_USER_LOCATION"]
+      p "LAT:"
+      p request.headers["HTTP_USER_LOCATION"].lat
+      p "JSON?!?!?"
+      p JSON.parse(request.headers["HTTP_USER_LOCATION"])
       if @current_user.update(lat: request.headers["HTTP_USER_LOCATION"]["lat"],
                               lng: request.headers["HTTP_USER_LOCATION"]["lng"]  )
       else
