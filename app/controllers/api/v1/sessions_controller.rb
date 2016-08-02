@@ -12,7 +12,9 @@ module Api::V1
       p "user_params.password"
       p user_params.password
       p "=============="
-      @user = User.find_by_name(user_params)
+
+      @user = User.find_by_name(params[:name])
+      p @user
       p @user.authenticate(params[:password])
 
       if @user && @user.authenticate(user_params)
