@@ -17,7 +17,7 @@ module Api::V1
   private
 
     def user_params
-      params.require(:user).permit(:email, :password)
+      params.require(:user).permit(:name, :email, :password)
     end
 
     def sanitized_user
