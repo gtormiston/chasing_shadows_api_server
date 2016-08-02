@@ -8,7 +8,6 @@ describe "Enemies", type: :request do
     @spitafileds_monster = Enemy.create(name: "Spitafields Monster", active: true, size: 1,lat: 51.51734, lng: -0.0732808)
     @inactive_monster = Enemy.create(name: "Inactive Monster", active: false, size: 1,lat: 51.51734, lng: -0.0732808)
     @bristol_monster = Enemy.create(name: "Bristol Monster", active: true, size: 1,lat: 51.454513, lng: 2.5879099999999)
-
   end
 
   describe "GET /api/v1/enemies" do
@@ -54,12 +53,6 @@ describe "Enemies", type: :request do
         end.to change{Enemy.find(mon_id).active}.from(true).to(false)
         expect(Enemy.find(mon_id).size).to eq(0)
       end
-
     end
-
-
   end
-
-
-
 end

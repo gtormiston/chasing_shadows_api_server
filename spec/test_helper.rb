@@ -24,5 +24,12 @@ end
 def update_location(user_id, location)
   user_api_key = User.find(user_id).api_key
   patch "/api/v1/users/#{user_id}", headers: { "HTTP_AUTHORIZATION" => "Token token=\"#{user_api_key}\"",
-                                              "USER_LOCATION" => location }
+                                              "HTTP_USER_LATITUDE" => location["lat"],
+                                              "HTTP_USER_LONGITUDE" => location["lng"]}
+end
+
+def log_in(name: "test1",
+           password: "password")
+  post '/api/v1/sessions', params: {name: name,
+                                    password: password}
 end

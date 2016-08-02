@@ -1,7 +1,7 @@
 
 module Api::V1
   class UsersController < ApiController
-    before_action :set_user, only: [:show, :destroy]
+    # before_action :set_user, only: [:show, :destroy]
 
     def index
       render json: @current_user
@@ -18,22 +18,19 @@ module Api::V1
     end
 
     def update
-      p "IN UPDATE ROUTE-"
-      p "LAT:"
-      p request.headers
+
       if @current_user.update(lat: request.headers["HTTP_USER_LATITUDE"],
                               lng: request.headers["HTTP_USER_LONGITUDE"]  )
-                              p "YESSSSSSSSS"
       else
-        p "FAIL"
+        render json: @user.errors, status: :unprocessable_entity
       end
     end
 
     private
 
-    def set_user
-      @user = User.find(params[:id])
-    end
+    # def set_user
+    #   @user = User.find(params[:id])
+    # end
 
     def user_params
       params.require(:user).permit(:name, :email, :password, :lat, :lng, :password_confirmation)
