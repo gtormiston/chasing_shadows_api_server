@@ -13,8 +13,11 @@ module Api::V1
     end
 
     def update
-      Attack.run(@enemy, @current_user)
+      messages = []
+      messages << Attack.run(@enemy, @current_user)
       @enemy.save
+      messages << "You've defeated #{@enemy.name}" if @enemy.dead?
+      render json: {message: messages}
     end
 
     private

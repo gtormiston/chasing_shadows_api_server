@@ -15,6 +15,10 @@ class Enemy < ApplicationRecord
     self.size -= 1
     deactivate if dead?
   end
+  
+  def dead?
+    self.size <= 0
+  end
 
   private
 
@@ -23,7 +27,4 @@ class Enemy < ApplicationRecord
     setActiveTimer = 60
   end
 
-  def dead?
-    self.size <= 0
-  end
 end

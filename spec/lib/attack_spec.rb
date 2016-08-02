@@ -9,16 +9,18 @@ describe Attack do
   describe ".run" do
     it "should damage the enemy if within range" do
       allow(enemy).to receive_messages(within_range_of: true,
-                                       damage: nil)
+                                       damage: nil,
+                                       name: "MonsterName")
       Attack.run(enemy, attacker)
       expect(enemy).to have_received :damage
     end
 
     it "doens't damage the enemy if not in range" do
       allow(enemy).to receive_messages(within_range_of: false,
-                                       damage: nil)
+                                       damage: nil,
+                                       name: "MonsterName")
       Attack.run(enemy, attacker)
-      expect(enemy).not_to have_received :damage                                 
+      expect(enemy).not_to have_received :damage
     end
   end
 end

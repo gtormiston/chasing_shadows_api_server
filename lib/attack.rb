@@ -1,5 +1,11 @@
 class Attack
   def self.run(enemy, attacker)
-    enemy.damage if enemy.within_range_of(attacker)
+    if enemy.within_range_of(attacker)
+      enemy.damage
+      "You've successfully attacked #{enemy.name}!"
+    else
+      "#{enemy.name} is not within attack range!"
+    end
   end
+
 end
