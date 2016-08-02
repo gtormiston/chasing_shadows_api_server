@@ -17,7 +17,7 @@ module Api::V1
 
       p "======="
       p @user
-      p @user.authenticate(params[:password])
+      # p @user.authenticate(params[:password])
 
       if @user && @user.authenticate(params[:password])
         render json: sanitized_user
