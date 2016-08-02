@@ -2,6 +2,9 @@ module Api::V1
   class SessionsController < ApiController
 
     def create
+      p "parrrrrammmmmss naaaaammmme: "
+      p params[:name]
+      p "eeeeennnnndd"
       @user = User.find_by_name(params[:name])
       if @user && @user.authenticate(params[:password])
         render json: sanitized_user
@@ -17,7 +20,7 @@ module Api::V1
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password)
+      params.require(:user).permit(:name, :password)
     end
 
     def sanitized_user
