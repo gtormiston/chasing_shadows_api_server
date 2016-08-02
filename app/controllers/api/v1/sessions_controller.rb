@@ -14,6 +14,11 @@ module Api::V1
       # p "=============="
 
       @user = User.find_by_name(params[:name])
+
+      p "======="
+      p @user
+      p @user.authenticate(params[:password])
+
       if @user && @user.authenticate(params[:password])
         render json: sanitized_user
       else
