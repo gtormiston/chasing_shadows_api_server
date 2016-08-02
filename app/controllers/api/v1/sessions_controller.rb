@@ -3,12 +3,19 @@ module Api::V1
 
     def create
       p "+++++++++++"
+      p "params[:name]"
       p params[:name]
+      p "params[:password]"
+      p params[:password]
       p "user_params"
       p user_params
+      p "user_params.password"
+      p user_params.password
       p "=============="
-      @user = User.find_by_name(params[:name])
-      if @user && @user.authenticate(params[:password])
+      @user = User.find_by_name(user_params)
+      p @user.authenticate(params[:password])
+
+      if @user && @user.authenticate(user_params)
         render json: sanitized_user
       else
         render json: {error: "Invalid credentials"}
