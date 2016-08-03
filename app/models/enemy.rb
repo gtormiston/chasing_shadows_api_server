@@ -1,6 +1,6 @@
 class Enemy < ApplicationRecord
   RANGE = 2
-  RANGE_OF_ATTACK = 2
+  RANGE_OF_ATTACK = 0.5
   acts_as_mappable
 
   def self.within_range_of(user, range = RANGE)
