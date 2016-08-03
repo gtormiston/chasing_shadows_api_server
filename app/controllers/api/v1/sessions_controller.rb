@@ -2,22 +2,24 @@ module Api::V1
   class SessionsController < ApiController
 
     def create
-      p "+++++++++++"
-      p "params[:name]"
-      p params[:name]
-      p "params[:password]"
-      p params[:password]
-      p "user_params"
-      p user_params
-      p "user_params.password"
-      p user_params.password
-      p "=============="
+      # p "+++++++++++"
+      # p "params[:name]"
+      # p params[:name]
+      # p "params[:password]"
+      # p params[:password]
+      # p "user_params"
+      # p user_params
+      # p "user_params.password"
+      # p user_params.password
+      # p "=============="
 
       @user = User.find_by_name(params[:name])
-      p @user
-      p @user.authenticate(params[:password])
 
-      if @user && @user.authenticate(user_params)
+      p "======="
+      p @user
+      # p @user.authenticate(params[:password])
+
+      if @user && @user.authenticate(params[:password])
         render json: sanitized_user
       else
         render json: {error: "Invalid credentials"}
