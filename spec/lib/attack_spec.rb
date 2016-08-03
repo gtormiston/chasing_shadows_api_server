@@ -11,6 +11,8 @@ describe Attack do
       allow(enemy).to receive_messages(within_range_of: true,
                                        damage: nil,
                                        name: "MonsterName")
+     allow(attacker).to receive_messages(
+                                      name: "attackerNAme")
       Attack.run(enemy, attacker)
       expect(enemy).to have_received :damage
     end
@@ -19,6 +21,8 @@ describe Attack do
       allow(enemy).to receive_messages(within_range_of: false,
                                        damage: nil,
                                        name: "MonsterName")
+     allow(attacker).to receive_messages(
+                                      name: "attackerNAme")
       Attack.run(enemy, attacker)
       expect(enemy).not_to have_received :damage
     end
