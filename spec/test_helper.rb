@@ -30,6 +30,6 @@ end
 
 def log_in(name: "test1",
            password: "password")
-  post '/api/v1/sessions', params: {name: name,
-                                    password: password}
+  post '/api/v1/sessions', params: {user: {name: name,
+                                    password: password}}
 end
