@@ -19,7 +19,7 @@ module Api::V1
       p @user
       # p @user.authenticate(params[:password])
 
-      if @user && @user.authenticate(params[:password])
+      if @user && @user.authenticate(user_params)
         render json: sanitized_user
       else
         render json: {error: "Invalid credentials"}
