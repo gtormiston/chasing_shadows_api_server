@@ -1,6 +1,6 @@
 class Enemy < ApplicationRecord
   RANGE = 2
-  RANGE_OF_ATTACK = 0.5
+  RANGE_OF_ATTACK = 2
   acts_as_mappable
 
   def self.within_range_of(user, range = RANGE)
@@ -15,7 +15,7 @@ class Enemy < ApplicationRecord
     self.size -= 1
     deactivate if dead?
   end
-  
+
   def dead?
     self.size <= 0
   end
