@@ -16,6 +16,7 @@ module Api::V1
 
     end
 
+
   private
 
     def user_params
