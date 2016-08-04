@@ -26,15 +26,68 @@ feature 'home page' do
     expect(page).to have_content 'Lorem ipsum'
   end
 
-  # scenario 'go to map page' do
+  # scenario 'unsuccessful log in' do
   #   visit 'http://localhost:8000/ios/www/index.html?env=dev'
   #   click_link 'login_link'
-  #   fill_in 'username', with: 'enzoo'
-  #   fill_in 'password', with: 'password'
+  #   fill_in 'username', with: 'enzoo1'
+  #   fill_in 'password', with: '123123'
   #   click_on 'Submit'
-  #   click_on 'gameplay_link'
-  #   expect(page).to have_css('div.playerMarker')
+  #   expect(page).not_to have_content 'Lorem ipsum'
   # end
+
+  scenario 'Sign up' do
+    visit 'http://localhost:8000/ios/www/index.html?env=dev'
+    fill_in 'password', with: '123123'
+    fill_in 'username', with: 'enzoo1'
+    fill_in 'password_confirmation', with: '123123'
+    fill_in 'email', with: "123@email.com"
+    click_on 'Submit'
+    expect(page).to have_content 'Lorem ipsum'
+  end
+
+  scenario 'go to map page' do
+    User.create(email: "123@email.com", name: "enzoo1", password: "123123", password_confirmation: "123123")
+    visit 'http://localhost:8000/ios/www/index.html?env=dev'
+    click_link 'login_link'
+    fill_in 'username', with: 'enzoo1'
+    fill_in 'password', with: '123123'
+    click_on 'Submit'
+    click_on 'gameplay_link'
+    expect(page).to have_css('div.playerMarker')
+  end
+
+  it 'a monster appear close to user location', :js => true do
+    User.create(email: "123@email.com", name: "enzoo1", password: "123123", password_confirmation: "123123", lat: 51, lng: -0.01)
+    Enemy.create(name: "Donald", size: 1, lng: -0.01, lat: 51, active: true)
+    visit 'http://localhost:8000/ios/www/index.html?env=dev'
+    simulate_location 51, -0.01
+    click_link 'login_link'
+    fill_in 'username', with: 'enzoo1'
+    fill_in 'password', with: '123123'
+    click_on 'Submit'
+    click_on 'gameplay_link'
+    expect(page).to have_css('div.playerMarker')
+    expect(page).to have_css('div.monster-marker')
+
+  end
+
+  it 'a monster appear close to user location', :js => true do
+    User.create(email: "123@email.com", name: "enzoo1", password: "123123", password_confirmation: "123123", lat: 51, lng: -0.01)
+    @enemy = Enemy.create(name: "Donald", size: 1, lng: -0.01, lat: 51, active: true)
+    visit 'http://localhost:8000/ios/www/index.html?env=dev'
+    simulate_location 51, -0.01
+    click_link 'login_link'
+    fill_in 'username', with: 'enzoo1'
+    fill_in 'password', with: '123123'
+    click_on 'Submit'
+    click_on 'gameplay_link'
+    expect(page).to have_css('div.playerMarker')
+    expect(page).to have_css('div.monster-marker')
+    sleep 1
+    find("div[data-marker_id=#{@enemy.id}]").click
+    sleep 10
+    expect(page).to have_button 'attack'
+  end
 
   # scenario 'successful sign up' do
   #   visit 'http://localhost:8000/ios/www/index.html?env=dev'
@@ -44,4 +97,23 @@ feature 'home page' do
   # end
 
 
+end
+
+
+
+def simulate_location(lat, lng)
+
+  page.driver.browser.execute_script <<-JS
+    window.navigator.geolocation.getCurrentPosition = function(success, failure){
+      var position = {coords : { latitude: #{lat}, longitude: #{lng} }};
+      success(position);
+    }
+
+    window.navigator.geolocation.watchPosition = function(success, failure, options) {
+      var position = {coords : { latitude: #{lat}, longitude: #{lng} }};
+      success(position);
+
+    }
+
+  JS
 end
