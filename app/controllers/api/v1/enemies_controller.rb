@@ -15,8 +15,11 @@ module Api::V1
     def update
       message = Attack.run(@enemy, @current_user)
       @enemy.save
-      render json: {error: message} unless message == ""
-      render json: {}
+      if message == ""
+        render json: {}
+      else
+        render json: {error: message}
+      end
     end
 
     private
