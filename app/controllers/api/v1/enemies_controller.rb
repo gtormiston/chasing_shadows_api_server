@@ -16,6 +16,7 @@ module Api::V1
       message = Attack.run(@enemy, @current_user)
       @enemy.save
       render json: {error: message} unless message == ""
+      render json: {}
     end
 
     private

@@ -68,7 +68,7 @@ feature 'home page' do
 
   end
 
-  it 'a monster appear close to user location', :js => true do
+  it 'can attack a monster', :js => true do
     User.create(email: "123@email.com", name: "enzoo1", password: "123123", password_confirmation: "123123", lat: 51, lng: -0.01)
     @enemy = Enemy.create(name: "Donald", size: 1, lng: -0.01, lat: 51, active: true)
     visit 'http://localhost:8000/ios/www/index.html?env=dev'
@@ -80,12 +80,32 @@ feature 'home page' do
     click_on 'START PLAYING'
     expect(page).to have_css('div.playerMarker')
     expect(page).to have_css('div.monster-marker')
-    sleep 100
+    sleep 1
     find("div#monster_#{@enemy.id}").click
     sleep 10
     expect(page).to have_button 'attack'
   end
 
+  it 'kills a monster', :js => true do
+    User.create(email: "123@email.com", name: "enzoo1", password: "123123", password_confirmation: "123123", lat: 51, lng: -0.01)
+    @enemy = Enemy.create(name: "Donald", size: 1, lng: -0.01, lat: 51, active: true)
+    visit 'http://localhost:8000/ios/www/index.html?env=dev'
+    simulate_location 51, -0.01
+    click_button 'sign_in_link'
+    fill_in 'username', with: 'enzoo1'
+    fill_in 'password', with: '123123'
+    click_on 'LOGIN'
+    click_on 'START PLAYING'
+    expect(page).to have_css('div.playerMarker')
+    expect(page).to have_css('div.monster-marker')
+    sleep 1
+    find("div#monster_#{@enemy.id}").click
+    expect(page).to have_button 'attack'
+    click_on 'attack'
+    sleep 2
+    expect(page).not_to have_button 'attack'
+
+  end
   # scenario 'successful sign up' do
   #   visit 'http://localhost:8000/ios/www/index.html?env=dev'
   #   fill_in 'username', with: 'enzoo'
