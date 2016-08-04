@@ -13,7 +13,7 @@ module Api::V1
       if @user.save
         render json: sanitized_user, status: :created
       else
-        render json: {error: @user.errors}, status: :unprocessable_entity
+        render json: {error: @user.errors}
       end
     end
 

@@ -3,7 +3,7 @@ module Api::V1
 
     def create
 
-      @user = User.find_by_name(user_params[:name])
+      @user = User.find_by_name(user_params[:name].downcase)
 
       if @user && @user.authenticate(user_params[:password])
         render json: sanitized_user

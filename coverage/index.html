@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2016-08-04T16:10:57+01:00">2016-08-04T16:10:57+01:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2016-08-04T18:16:06+01:00">2016-08-04T18:16:06+01:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -25,7 +25,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         2.45
+         2.37
        </span>
     </span> hits/line)
   </h2>
@@ -57,7 +57,7 @@
         <td>13</td>
         <td>13</td>
         <td>0</td>
-        <td>5.7</td>
+        <td>4.8</td>
       </tr>
       
       <tr>
@@ -67,7 +67,7 @@
         <td>17</td>
         <td>16</td>
         <td>1</td>
-        <td>1.9</td>
+        <td>1.6</td>
       </tr>
       
       <tr>
@@ -127,7 +127,7 @@
         <td>17</td>
         <td>17</td>
         <td>0</td>
-        <td>3.2</td>
+        <td>2.9</td>
       </tr>
       
       <tr>
@@ -314,8 +314,8 @@
           <code class="ruby">    def authenticate</code>
         </li>
       
-        <li class="covered" data-hits="21" data-linenumber="10">
-          <span class="hits">21</span>
+        <li class="covered" data-hits="17" data-linenumber="10">
+          <span class="hits">17</span>
           
           <code class="ruby">      authenticate_token || render_unauthorized</code>
         </li>
@@ -338,14 +338,14 @@
           <code class="ruby">    def authenticate_token</code>
         </li>
       
-        <li class="covered" data-hits="21" data-linenumber="14">
-          <span class="hits">21</span>
+        <li class="covered" data-hits="17" data-linenumber="14">
+          <span class="hits">17</span>
           
           <code class="ruby">      authenticate_with_http_token do |token, options|</code>
         </li>
       
-        <li class="covered" data-hits="20" data-linenumber="15">
-          <span class="hits">20</span>
+        <li class="covered" data-hits="16" data-linenumber="15">
+          <span class="hits">16</span>
           
           <code class="ruby">        @current_user = User.find_by(api_key: token)</code>
         </li>
@@ -464,8 +464,8 @@
           <code class="ruby">    def index</code>
         </li>
       
-        <li class="covered" data-hits="11" data-linenumber="8">
-          <span class="hits">11</span>
+        <li class="covered" data-hits="7" data-linenumber="8">
+          <span class="hits">7</span>
           
           <code class="ruby">      render json: Enemy.within_range_of(@current_user)</code>
         </li>
@@ -647,7 +647,7 @@
         <li class="covered" data-hits="6" data-linenumber="6">
           <span class="hits">6</span>
           
-          <code class="ruby">      @user = User.find_by_name(user_params[:name])</code>
+          <code class="ruby">      @user = User.find_by_name(user_params[:name].downcase)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="7">
@@ -905,7 +905,7 @@
         <li class="covered" data-hits="3" data-linenumber="16">
           <span class="hits">3</span>
           
-          <code class="ruby">        render json: {error: @user.errors}, status: :unprocessable_entity</code>
+          <code class="ruby">        render json: {error: @user.errors}</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="17">
@@ -1244,8 +1244,8 @@
           <code class="ruby">  def self.within_range_of(user, range = RANGE)</code>
         </li>
       
-        <li class="covered" data-hits="18" data-linenumber="7">
-          <span class="hits">18</span>
+        <li class="covered" data-hits="14" data-linenumber="7">
+          <span class="hits">14</span>
           
           <code class="ruby">    Enemy.within(range, origin: [user.lat, user.lng]).select(&amp;:active)</code>
         </li>

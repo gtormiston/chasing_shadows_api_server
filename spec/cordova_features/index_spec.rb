@@ -4,14 +4,11 @@ Capybara.default_driver = :selenium
 Capybara.server_port = 3000
 
 feature 'home page' do
-  scenario 'visiting home page' do
-    visit 'http://localhost:8000/ios/www/index.html?env=dev'
-    expect(page).to have_content 'Chasing Shadows'
-  end
+
 
   scenario 'log in page' do
     visit 'http://localhost:8000/ios/www/index.html?env=dev'
-    click_link 'login_link'
+    click_button 'sign_in_link'
     expect(page).to have_field('username')
     expect(page).not_to have_field('email')
   end
@@ -19,11 +16,11 @@ feature 'home page' do
   scenario 'successful log in' do
     User.create(email: "123@email.com", name: "enzoo1", password: "123123", password_confirmation: "123123")
     visit 'http://localhost:8000/ios/www/index.html?env=dev'
-    click_link 'login_link'
+    click_button 'sign_in_link'
     fill_in 'username', with: 'enzoo1'
     fill_in 'password', with: '123123'
-    click_on 'Submit'
-    expect(page).to have_content 'Lorem ipsum'
+    click_on 'LOGIN'
+    expect(page).to have_content 'THE STORY SO FAR'
   end
 
   # scenario 'unsuccessful log in' do
@@ -41,18 +38,18 @@ feature 'home page' do
     fill_in 'username', with: 'enzoo1'
     fill_in 'password_confirmation', with: '123123'
     fill_in 'email', with: "123@email.com"
-    click_on 'Submit'
-    expect(page).to have_content 'Lorem ipsum'
+    click_on 'SIGN UP'
+    expect(page).to have_content 'THE STORY SO FAR'
   end
 
   scenario 'go to map page' do
     User.create(email: "123@email.com", name: "enzoo1", password: "123123", password_confirmation: "123123")
     visit 'http://localhost:8000/ios/www/index.html?env=dev'
-    click_link 'login_link'
+    click_button 'sign_in_link'
     fill_in 'username', with: 'enzoo1'
     fill_in 'password', with: '123123'
-    click_on 'Submit'
-    click_on 'gameplay_link'
+    click_on 'LOGIN'
+    click_on 'START PLAYING'
     expect(page).to have_css('div.playerMarker')
   end
 
@@ -61,11 +58,11 @@ feature 'home page' do
     Enemy.create(name: "Donald", size: 1, lng: -0.01, lat: 51, active: true)
     visit 'http://localhost:8000/ios/www/index.html?env=dev'
     simulate_location 51, -0.01
-    click_link 'login_link'
+    click_button 'sign_in_link'
     fill_in 'username', with: 'enzoo1'
     fill_in 'password', with: '123123'
-    click_on 'Submit'
-    click_on 'gameplay_link'
+    click_on 'LOGIN'
+    click_on 'START PLAYING'
     expect(page).to have_css('div.playerMarker')
     expect(page).to have_css('div.monster-marker')
 
@@ -76,15 +73,15 @@ feature 'home page' do
     @enemy = Enemy.create(name: "Donald", size: 1, lng: -0.01, lat: 51, active: true)
     visit 'http://localhost:8000/ios/www/index.html?env=dev'
     simulate_location 51, -0.01
-    click_link 'login_link'
+    click_button 'sign_in_link'
     fill_in 'username', with: 'enzoo1'
     fill_in 'password', with: '123123'
-    click_on 'Submit'
-    click_on 'gameplay_link'
+    click_on 'LOGIN'
+    click_on 'START PLAYING'
     expect(page).to have_css('div.playerMarker')
     expect(page).to have_css('div.monster-marker')
-    sleep 1
-    find("div[data-marker_id=#{@enemy.id}]").click
+    sleep 100
+    find("div#monster_#{@enemy.id}").click
     sleep 10
     expect(page).to have_button 'attack'
   end
